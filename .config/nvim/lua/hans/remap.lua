@@ -105,5 +105,5 @@ map.set('i', "<BS>", deletePair, {silent = true, expr = true})
 
 -- Wrap selection in brackets, backticks, etc..
 for open, close in pairs(pair) do
-  map.set('v', "<leader>" .. open, ":s/.*/\\" .. open .. "\\0\\" .. close .. "<CR>")
+  map.set('v', "<leader>" .. open, "c" .. open .. close .. '<ESC>hp')
 end
