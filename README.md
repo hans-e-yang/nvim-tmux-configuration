@@ -11,5 +11,6 @@ Add the files to home (~) directory
 
 ## Others
 I used this on a Linux Mint 22 OS.
+Much of the configuration and plugins are taken from this [The Primeagen youtube video](https://youtu.be/w7i4amO_zaE?si=9UdWkqHR-pVDz2Jv)
 
 
