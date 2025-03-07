@@ -52,15 +52,15 @@ return {
         formatting = lsp_zero.cmp_format({details = true}),
         mapping = {
           -- Navigate between completion item
-          ['<C-k>'] = cmp.mapping.select_prev_item(),
-          ['<C-j>'] = cmp.mapping.select_next_item(),
+          -- ['<C-m>'] = cmp.mapping.select_prev_item(),
+          -- ['<C-n>'] = cmp.mapping.select_next_item(),
 
           -- toggle completion
           ['<Esc>'] = cmp.mapping.abort(),
 
           -- navigate between snippet placeholder
-          -- ['<C-a>'] = cmp_action.luasnip_jump_backward(),
-          -- ['<C-d>'] = cmp_action.luasnip_jump_forward(),
+          ['<C-a>'] = cmp_action.luasnip_jump_backward(),
+          ['<C-d>'] = cmp_action.luasnip_jump_forward(),
 
           -- Confirm item
           ['<Tab>'] = cmp.mapping.confirm({select = true}),

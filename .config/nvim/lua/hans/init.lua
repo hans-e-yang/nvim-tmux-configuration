@@ -29,3 +29,14 @@ vim.opt.scrolloff = 8
 vim.opt.updatetime = 750
 vim.opt.colorcolumn = "80"
 
+-- Add MD LSP
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = "markdown",
+  callback = function()
+    vim.lsp.start({
+      name = "markdown lsp",
+      -- Custom md lsp server
+      cmd = { os.getenv("HOME") .. "/.local/share/nvim/mdlsp" },
+    })
+  end
+})

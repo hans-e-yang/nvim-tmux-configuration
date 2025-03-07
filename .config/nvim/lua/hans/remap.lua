@@ -51,6 +51,10 @@ map.set('i', "<C-E>", "<Esc>A")
 -- Good <cr> behaviour when between tags
 map.set("i", "<C-L>", "<CR><Esc>kA<Cr>")
 
+-- Somehow, K is mapped to man, which I rarely use
+-- This is to override that default behaviour
+map.set("n", "K", ":lua vim.lsp.buf.hover()<CR>")
+
 -- Tabout Behaviour
 local taboutChars = {
   [']'] = true,
