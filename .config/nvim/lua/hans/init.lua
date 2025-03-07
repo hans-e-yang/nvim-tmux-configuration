@@ -35,7 +35,6 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     vim.lsp.start({
       name = "markdown lsp",
-      -- Custom md lsp server
       cmd = { os.getenv("HOME") .. "/.local/share/nvim/mdlsp" },
     })
   end
