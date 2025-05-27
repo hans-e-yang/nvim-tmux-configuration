@@ -10,22 +10,22 @@ return {
       vim.g.lsp_zero_extend_lspconfig = 0
     end,
     keys = {
-      { "[d", 
-        function() 
+      { "[d",
+        function()
           vim.diagnostic.goto_prev()
           vim.diagnostic.open_float()
         end
       }, {
         "]d",
-        function() 
+        function()
           vim.diagnostic.goto_next()
           vim.diagnostic.open_float()
         end
       }
     }
-  }, 
+  },
   {
-    'williamboman/mason.nvim',
+    'mason-org/mason.nvim',
     lazy = false,
     config = true,
   },
@@ -77,15 +77,15 @@ return {
       )
     end
   },
-
   -- LSP
   {
     'neovim/nvim-lspconfig',
+    version = "v1.8.0",
     cmd = {'LspInfo', 'LspInstall', 'LspStart'},
     event = {'BufReadPre', 'BufNewFile'},
     dependencies = {
       {'hrsh7th/cmp-nvim-lsp'},
-      {'williamboman/mason-lspconfig.nvim'},
+      {'mason-org/mason-lspconfig.nvim', version = "v1.32.0"},
     },
     config = function()
       -- This is where all the LSP shenanigans will live
@@ -125,5 +125,51 @@ return {
         }
       })
     end
-  }
+  },
+  -- {
+  --   "lewis6991/hover.nvim",
+  --   config = function()
+  --     require("hover").setup {
+  --       init = function()
+  --         -- Require providers
+  --         require("hover.providers.lsp")
+  --         -- require('hover.providers.gh')
+  --         -- require('hover.providers.gh_user')
+  --         -- require('hover.providers.jira')
+  --         -- require('hover.providers.dap')
+  --         -- require('hover.providers.fold_preview')
+  --         -- require('hover.providers.diagnostic')
+  --         -- require('hover.providers.man')
+  --         -- require('hover.providers.dictionary')
+  --         -- require('hover.providers.highlight')
+  --       end,
+  --       preview_opts = {
+  --         border = 'single'
+  --       },
+  --       -- Whether the contents of a currently open hover window should be moved
+  --       -- to a :h preview-window when pressing the hover keymap.
+  --       preview_window = false,
+  --       title = true,
+  --       mouse_providers = {
+  --         'LSP'
+  --       },
+  --       mouse_delay = 1000
+  --     }
+  --
+  --     -- Setup keymaps
+  --     vim.keymap.set("n", "K", require("hover").hover, {desc = "hover.nvim"})
+  --     vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "hover.nvim (select)"})
+  --     vim.keymap.set("n", "<C-p>", function() require("hover").hover_switch("previous") end, {desc = "hover.nvim (previous source)"})
+  --     vim.keymap.set("n", "<C-n>", function() require("hover").hover_switch("next") end, {desc = "hover.nvim (next source)"})
+  --
+  --     -- Mouse support
+  --     vim.keymap.set('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
+  --     vim.o.mousemoveevent = true
+  --   end
+  -- },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   opts = {},
+  -- }
 }

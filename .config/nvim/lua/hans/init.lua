@@ -4,6 +4,11 @@ vim.o.tabstop = 2
 vim.o.expandtab = true
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
+vim.o.autoindent = true
+vim.o.smartindent = true
+
+-- Idk this fixes indenting error
+vim.o.indentexpr = ""
 
 -- Folding
 vim.opt.foldmethod = "indent"
@@ -28,14 +33,3 @@ vim.opt.incsearch = true
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 750
 vim.opt.colorcolumn = "80"
-
--- Add MD LSP
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = "markdown",
-  callback = function()
-    vim.lsp.start({
-      name = "markdown lsp",
-      cmd = { os.getenv("HOME") .. "/.local/share/nvim/mdlsp" },
-    })
-  end
-})
