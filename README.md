@@ -1,11 +1,12 @@
 # nvim-tmux-configuration
 Personal nvim and tmux configuration files with gruvbox color theme.
-I3 configuration also added
+I3 configuration also added, using I3bar and I3Status
 
 ## Prerequisites
 - Requires installation of tpm in ~/.tmux/plugins/tpm
 - Requires nvim to be installed (currently using v0.9.5)
 - Requires lua to be installed in the system
+- Requires 'UbuntuNerdFont'. Other nerd fonts can be used, specify in .config/i3/config
 
 ## Versions
 - Neovim v0.9.5
