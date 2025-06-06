@@ -23,6 +23,10 @@ font pango:UbuntuNerdFont 12
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
+# Setup picom
+exec_always --no-startup-id picom --config $HOME/.config/i3/picom.conf 
+  # --log-file $HOME/.config/i3/picom.log -b
+
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
@@ -55,9 +59,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+# bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+bindsym $mod+d exec "rofi -combi-modes drun,run,window -show combi"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -154,7 +158,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -183,24 +187,39 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-focus_follows_mouse no
+# focus_follows_mouse no
 gaps inner 10
 
 # Add exit mode
-mode "exit: [l]ogout, [r]eboot, [s]hutdown" {
+mode "exit: [l]ogout, [r]eboot, [s]hutdown, sus[p]end" {
 
   bindsym l exec i3-msg exit
 
-  bindsym r exec shutdown -r now
+  bindsym r exec systemctl reboot
 
   bindsym s exec shutdown now
+
+  bindsym p exec systemctl suspend
 
   bindsym Escape mode "default"
 
   bindsym Return mode "default"
-
 }
-bindsym $mod+x mode "exit: [l]ogout, [r]eboot, [s]hutdown"
+
+bindsym $mod+x mode "exit: [l]ogout, [r]eboot, [s]hutdown, sus[p]end"
+
+# Add app shortcuts mode
+mode "shortcuts" {
+  bindsym f exec firefox; mode "default"
+  bindsym $mod+f exec firefox; mode "default"
+  bindsym w exec rofi-wifi-menu; mode "default"
+  bindsym $mod+w exec rofi-wifi-menu; mode "default"
+  bindsym t exec thunar; mode "default"
+  bindsym $mod+t exec thunar; mode "default"
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+bindsym $mod+c mode "shortcuts"
 
 # Gruvbox color scheme
 set $bg #282828
@@ -211,9 +230,12 @@ set $yellow #d79921
 set $blue #458588
 set $purple #b16286
 set $aqua #689d6a
+set $orange #d65d0e
+
+set $primary #d79921
 
 # class                 border  backgr. text    indicator child_border
-client.focused          $yellow  $bg     $fg     $purple   $yellow
+client.focused          $primary  $primary     $bg     $primary   $primary
 # client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
 # client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 # client.urgent           #2f343a #900000 #ffffff #900000   #900000
@@ -224,7 +246,7 @@ client.background       $bg
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status --config ~/.config/i3/i3status.conf
+        status_command i3status --config $HOME/.config/i3/i3status.conf
         # status_command $HOME/.local/share/bumblebee-status/bumblebee-status \
         #   -m cpu memory battery time pasink pasource \
         #   -p time.format="%H:%M" \
@@ -234,9 +256,9 @@ bar {
         colors {
           background $bg
           statusline $fg
-          separator $yellow
+          separator $primary
 
-          focused_workspace $bg $yellow
+          focused_workspace $bg $primary
           inactive_workspace $fg $bg
         }
 }
